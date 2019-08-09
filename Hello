@@ -67,42 +67,41 @@ class CodeForces {
         }
 
 */
-
-int n=sc.nextInt();
-int a[]=new int[n+1];
-        int sum[]=new int[n+1];
-
-for(int i=1;i<=n;i++)
-{
-    a[i]=sc.nextInt();
-if(i==1)
-    sum[1]=a[1];
-else
-    sum[i]=a[i]^sum[i-1];
-}
-long count = 0;
+int t=sc.nextInt();
+for(int h=0;h<t;h++) {
+    int n = sc.nextInt();
 
 
-for(int i=1;i<=n;i++)
-{
-for(int j=i+1;j<=n;j++)
-{
+    int a[] = new int[n + 1];
+    int sum[] = new int[n + 1];
 
-        long val=sum[j]^sum[i-1];
-        if(val==0)
-        {
-            count+=(j-i);
-           // System.out.println(j+"  "+i);
+    for (int i = 1; i <= n; i++) {
+        a[i] = sc.nextInt();
+        if (i == 1)
+            sum[1] = a[1];
+        else
+            sum[i] = a[i] ^ sum[i - 1];
+    }
+    long count = 0;
+
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+
+            long val = sum[j] ^ sum[i - 1];
+            if (val == 0) {
+                count += (j - i);
+                // System.out.println(j+"  "+i);
+            }
+
+
         }
 
 
+    }
+    System.out.println(count);
+
 }
-
-
-}
-        System.out.println(count);
-
-
 
 
 
