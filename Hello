@@ -67,50 +67,59 @@ class CodeForces {
         }
 
 */
-int t=sc.nextInt();
-for(int h=0;h<t;h++) {
-    int n = sc.nextInt();
+        long count = 0;
+        int t = sc.nextInt();
+        for (int h = 0; h < t; h++) {
+            int n = sc.nextInt();
+            Map<Integer, List<Integer>> map = new HashMap<>();
 
+            count = 0;
+            int a[] = new int[n + 1];
+            int sum[] = new int[n + 1];
 
-    int a[] = new int[n + 1];
-    int sum[] = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
+                a[i] = sc.nextInt();
+                if (i == 1)
+                    sum[1] = a[1];
+                else
+                    sum[i] = a[i] ^ sum[i - 1];
 
-    for (int i = 1; i <= n; i++) {
-        a[i] = sc.nextInt();
-        if (i == 1)
-            sum[1] = a[1];
-        else
-            sum[i] = a[i] ^ sum[i - 1];
-    }
-    long count = 0;
+                if (map.containsKey(sum[i]))
+                    map.get(sum[i]).add(i);
+                else {
+                    map.put(sum[i], new ArrayList<>());
+                    map.get(sum[i]).add(i);
+                }
+                if (sum[i] == 0) {
+                    count += (i-1);
+                    //        System.out.println(i+"  ,");
+                }
+            }
 
+            for (int i : map.keySet()) {
+                List<Integer> list = map.get(i);
 
-    for (int i = 1; i <= n; i++) {
-        for (int j = i + 1; j <= n; j++) {
+                if (list.size() < 2) {
 
-            long val = sum[j] ^ sum[i - 1];
-            if (val == 0) {
-                count += (j - i);
-                // System.out.println(j+"  "+i);
+                    continue;
+                }
+                    long val = 0;
+                long k = list.size() - 1;
+                for (int j = list.size() - 1; j >= 0; j--) {
+                    val += (list.get(j) * k);
+                    k -= 2;
+                }
+                count += val;
+                count -= ((list.size() * (list.size() - 1)) / 2);
             }
 
 
+            System.out.println(count);
+
+
         }
-
-
     }
-    System.out.println(count);
-
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -201,9 +210,6 @@ long value=0;
 
 
 
-        }
-
-    }
 
 
 /*
