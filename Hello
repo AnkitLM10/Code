@@ -1,0 +1,217 @@
+import java.io.*;
+import java.util.*;
+
+class CodeForces {
+    static long max = 0;
+    static int n1 = 0, n2 = 0;
+    static char op1 = ' ', op2 = ' ', op3 = ' ', op4 = ' ';
+
+
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        FastReader sc = new FastReader();
+
+
+/*
+
+
+        int v=1;
+        for(int i=2;i<=7;i++)
+        {
+            v=v^i;
+            System.out.println(v);
+        }
+
+*/
+
+int n=sc.nextInt();
+int a[]=new int[n+1];
+        int sum[]=new int[n+1];
+
+for(int i=1;i<=n;i++)
+{
+    a[i]=sc.nextInt();
+if(i==1)
+    sum[1]=a[1];
+else
+    sum[i]=a[i]^sum[i-1];
+}
+long count = 0;
+
+
+for(int i=1;i<=n;i++)
+{
+for(int j=i+1;j<=n;j++)
+{
+
+        long val=sum[j]^sum[i-1];
+        if(val==0)
+        {
+            count+=(j-i);
+           // System.out.println(j+"  "+i);
+        }
+
+
+}
+
+
+}
+        System.out.println(count);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+count=0;
+
+
+
+
+
+
+
+
+
+
+            for (int i = 1; i <= n; i++) {
+
+                for (int j = i ; j <=n ; j++) {
+                    if(j==i)
+                        vali=a[i];
+                    else
+                        vali=vali^a[j];
+
+                    for (int k = j+1; k <= n; k++) {
+                        if(k==j+1)
+                            valj=a[k];
+                        else
+                            valj=valj^a[k];
+                        if(vali==valj)
+                        {
+long value=0;
+                        for(int l=i;l<=j;l++)
+                        {
+                            if(l==i)
+                                value=a[l];
+                            else
+                                value=value^a[l];
+                            System.out.print(a[l]+" ");
+                        }
+                            System.out.print("   = = = ");
+                            for(int l=j+1;l<=k;l++)
+                            {
+
+                                System.out.print(a[l]+" ");
+                            }
+                            System.out.println("          ,"+value);
+                            count++;
+
+
+
+
+
+                        }
+                    }
+
+
+                }
+
+            }
+           System.out.println(count);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+        }
+
+    }
+
+
+/*
+
+1
+20 1 2 3 4 5 8 5 2 1  4 5 6 5 2 5 4 2 5
+2
+25
+
+ */
