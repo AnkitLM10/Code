@@ -2,7 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class CodeForces {
-    static long max = 0;
+    static int max = 0;
+    static int ii=-1;static int jj=-1;
     static int n1 = 0, n2 = 0;
     static char op1 = ' ', op2 = ' ', op3 = ' ', op4 = ' ';
 
@@ -70,6 +71,13 @@ public class CodeForces {
             Arrays.fill(v[i], -1);
         int max = find(0, n - 1, l, one, zero, n, a, v);
         System.out.println(max);
+        for(int i=0;i<n;i++)
+        {
+            if(i>=ii && i<=jj)
+                System.out.print(1+" ");
+            else
+                System.out.print(a[i]+" ");
+        }
 
 
     }
@@ -81,8 +89,15 @@ public class CodeForces {
             return 0;
         if (v[i][j] != -1)
             return v[i][j];
-        if (o + k == (j - i) + 1)
-            return (j - i) + 1;
+        if (o + k == (j - i) + 1) {
+            int m = (j - i) + 1;
+            if (m > max)
+            {max=m;
+                ii = i;
+            jj = j;
+        }
+            return m;
+        }
 
         int ai = a[i];
         int aj = a[j];
