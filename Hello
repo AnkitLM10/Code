@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class CodeForces {
+public class CodeForces {
     static long max = 0;
     static int n1 = 0, n2 = 0;
     static char op1 = ' ', op2 = ' ', op3 = ' ', op4 = ' ';
@@ -55,168 +55,42 @@ class CodeForces {
 
         FastReader sc = new FastReader();
 
-
-/*
-
-
-        int v=1;
-        for(int i=2;i<=7;i++)
-        {
-            v=v^i;
-            System.out.println(v);
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        int l = sc.nextInt();
+        int zero = 0, one = 0;
+        for (int i = 0; i < n; i++) {
+            int k = sc.nextInt();
+            a[i] = k;
+            if (k == 0) zero++;
+            else one++;
         }
-
-*/
-        long count = 0;
-        int t = sc.nextInt();
-        for (int h = 0; h < t; h++) {
-            int n = sc.nextInt();
-            Map<Integer, List<Integer>> map = new HashMap<>();
-
-            count = 0;
-            int a[] = new int[n + 1];
-            int sum[] = new int[n + 1];
-
-            for (int i = 1; i <= n; i++) {
-                a[i] = sc.nextInt();
-                if (i == 1)
-                    sum[1] = a[1];
-                else
-                    sum[i] = a[i] ^ sum[i - 1];
-
-                if (map.containsKey(sum[i]))
-                    map.get(sum[i]).add(i);
-                else {
-                    map.put(sum[i], new ArrayList<>());
-                    map.get(sum[i]).add(i);
-                }
-                if (sum[i] == 0) {
-                    count += (i-1);
-                    //        System.out.println(i+"  ,");
-                }
-            }
-
-            for (int i : map.keySet()) {
-                List<Integer> list = map.get(i);
-
-                if (list.size() < 2) {
-
-                    continue;
-                }
-                    long val = 0;
-                long k = list.size() - 1;
-                for (int j = list.size() - 1; j >= 0; j--) {
-                    val += (list.get(j) * k);
-                    k -= 2;
-                }
-                count += val;
-                count -= ((list.size() * (list.size() - 1)) / 2);
-            }
+        int v[][] = new int[n][n];
+        for (int i = 0; i < n; i++)
+            Arrays.fill(v[i], -1);
+        int max = find(0, n - 1, l, one, zero, n, a, v);
+        System.out.println(max);
 
 
-            System.out.println(count);
-
-
-        }
     }
+
+    private static int find(int i, int j, int k, int o, int z, int n, int[] a, int[][] v) {
+
+
+        if (i > j)
+            return 0;
+        if (v[i][j] != -1)
+            return v[i][j];
+        if (o + k == (j - i) + 1)
+            return (j - i) + 1;
+
+        int ai = a[i];
+        int aj = a[j];
+        int sum = Math.max(find(i + 1, j, k, (ai == 1) ? o - 1 : o, (ai == 0) ? z - 1 : z, n, a, v), find(i, j - 1, k, (aj == 1) ? o - 1 : o, (aj == 0) ? z - 1 : z, n, a, v));
+        v[i][j] = sum;
+        return sum;
+
+    }
+
+
 }
-
-
-
-
-
-
-
-
-/*
-
-count=0;
-
-
-
-
-
-
-
-
-
-
-            for (int i = 1; i <= n; i++) {
-
-                for (int j = i ; j <=n ; j++) {
-                    if(j==i)
-                        vali=a[i];
-                    else
-                        vali=vali^a[j];
-
-                    for (int k = j+1; k <= n; k++) {
-                        if(k==j+1)
-                            valj=a[k];
-                        else
-                            valj=valj^a[k];
-                        if(vali==valj)
-                        {
-long value=0;
-                        for(int l=i;l<=j;l++)
-                        {
-                            if(l==i)
-                                value=a[l];
-                            else
-                                value=value^a[l];
-                            System.out.print(a[l]+" ");
-                        }
-                            System.out.print("   = = = ");
-                            for(int l=j+1;l<=k;l++)
-                            {
-
-                                System.out.print(a[l]+" ");
-                            }
-                            System.out.println("          ,"+value);
-                            count++;
-
-
-
-
-
-                        }
-                    }
-
-
-                }
-
-            }
-           System.out.println(count);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-
-
-
-
-
-
-
-/*
-
-1
-20 1 2 3 4 5 8 5 2 1  4 5 6 5 2 5 4 2 5
-2
-25
-
- */
