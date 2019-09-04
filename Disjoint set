@@ -1,0 +1,77 @@
+package com.company;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class test {
+    static int max = Integer.MAX_VALUE;
+    static long maxValue = Integer.MAX_VALUE;
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int s[] = new int[9];
+        Arrays.fill(s, -1);
+        for (int i = 0; i < 9; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int aa=a;
+            int bb=b;
+            int pa = s[a];
+            int pb = s[b];
+
+            if (pa > 0) {
+                int k = a;
+                while (s[k] > 0) {
+                    k = s[k];
+                   // System.out.println("1" + " " + k + " " + s[k]);
+                }
+a=k;
+            }
+
+            if (pb > 0) {
+                int k = b;
+                while (s[k] > 0) {
+                    k = s[k];
+                   // System.out.println("2");
+                }
+b=k;
+            }
+            pa = s[a];
+            pb = s[b];
+
+            System.out.println(s[a] + "   " + s[b]+ "   "+a+"   "+b);
+
+
+
+
+            if(s[a]!=-1 && a==b)
+            {
+                System.out.println("Cycle");
+                continue;
+            }
+
+
+            if(Math.min(s[a],s[b])==s[a])
+            {
+                s[a]+=s[b];
+                s[b]=a;
+                s[bb]=a;
+            }
+else
+            {
+                s[b]+=s[a];
+                s[aa]=b;
+                s[a]=b;
+            }
+
+            for (int ss : s)
+                System.out.print(ss + " ");
+        }
+
+        for (int i : s)
+            System.out.print(i + " ");
+
+
+    }
+}
