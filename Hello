@@ -1,84 +1,37 @@
 package com.company;
 
-import java.util.Scanner;
-public class test {
+        import java.util.Arrays;
+        import java.util.Scanner;
+
+public class CodeForces {
     static int max = Integer.MAX_VALUE;
-    static long maxValue=Integer.MAX_VALUE;
+    static long maxValue = Integer.MAX_VALUE;
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
-        String s=sc.next();
-        int n=s.length();
-        long v[][]=new long[s.length()][5];
-        for(int i=0;i<v.length;i++)
-        {
-            for(int j=0;j<5;j++)
-            {
-                v[i][j]=-1;
-                
-            }
-        }
-        
-        long ans  =  calc(s,n-1,4,v);
+        int n = sc.nextInt();
+       String s=sc.next();
+       int a[]=new int[s.length()+1];
+       int v=0;
+       for(int i=0;i<s.length();i++)
+       {
+           if(s.charAt(i)=='1')
+               v++;
+           a[i+1]=v;
+       }
+       int ans = 0;
+       for(int i=1;i<=s.length();i++)
+       {
+           for(int j=i;j<=s.length();j++)
+           {
+               if(a[j]-a[i-1]==n)
+                   ans++;
+               if(a[j]-a[i-1]>n)
+                   break;
+           }
+       }
         System.out.println(ans);
-    }
-
-    private static long calc(String s, int i, int n, long[][] v) {
-      //  System.out.println(i+"  "+n);
-        if(i<0)
-            return 0;
-if(n<0)
-    return  1;
-long sum = 0;
-
-if(v[i][n]!=-1)
-    return v[i][n];
-        if(n==4 )
-        {
-            if(s.charAt(i)=='v')
-            sum = calc(s,i-1,n-1, v) + calc(s,i-1,n, v);
-        else
-            sum= calc(s,i-1,n, v);
-        }else if(n==3)
-        {
-            if(s.charAt(i)=='v')
-            {
-                sum= calc(s,i-1,n-1, v);
-            }
-            else sum= 0;
-        }
-        else if(n==2)
-        {
-            if(s.charAt(i)=='o')
-            {
-                sum= calc(s,i-1,n-1, v)+calc(s,i-1,n, v);
-
-            }
-            else
-                sum= calc(s,i-1,n, v);
-        }
-        else if(n==1)
-        {
-
-            if(s.charAt(i)=='v')
-                sum= calc(s,i-1,n-1, v)+calc(s,i-1,n, v);
-            else
-                sum= calc(s,i-1,n, v);
-        }
-        else if(n==0)
-        {
-            if(s.charAt(i)=='v')
-                sum= 1;
-            else sum= 0;
-        }
-v[i][n]=sum;
-        return sum;
-
-
-
-
 
     }
 }
