@@ -1,9 +1,11 @@
 package com.company;
 
-        import java.util.Arrays;
-        import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
-public class CodeForces {
+public class test {
     static int max = Integer.MAX_VALUE;
     static long maxValue = Integer.MAX_VALUE;
 
@@ -11,27 +13,52 @@ public class CodeForces {
 
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-       String s=sc.next();
-       int a[]=new int[s.length()+1];
-       int v=0;
-       for(int i=0;i<s.length();i++)
-       {
-           if(s.charAt(i)=='1')
-               v++;
-           a[i+1]=v;
-       }
-       int ans = 0;
-       for(int i=1;i<=s.length();i++)
-       {
-           for(int j=i;j<=s.length();j++)
-           {
-               if(a[j]-a[i-1]==n)
-                   ans++;
-               if(a[j]-a[i-1]>n)
-                   break;
-           }
-       }
-        System.out.println(ans);
+        int k = sc.nextInt();
+        long a[]=new long[8001];
+        long mod = 1000000007;
+        for(int i=0;i<n;i++)
+        a[sc.nextInt()]++;
+        Arrays.sort(a);
+        List<Long> list=new ArrayList<>();
+        for(int i=8000;i>=0;i--)
+        {
+            if(a[i]==0)
+                break;
+            list.add(a[i]);
+        }
+        long array[]=new long[list.size()];
+long ans = 1;
+        for(int i=0;i<list.size();i++)
+        {
+            array[i]=list.get(i);
+        ans+=array[i];
+        }
+int l=list.size()-1;
 
+while(k>1 && l!=0)
+{
+    
+    long p=array[l];
+    for(int i=l-1;i>=0;i--)
+    {
+        long m=array[i];
+        array[i]=  ((p%mod)*(list.get(i)%mod))%mod;
+p=((p%mod)+(m%mod))%mod;
+        ans=   ((ans%mod)  + (array[i]%mod)%mod)  ;
+    }
+
+
+k--;
+    l--;
+
+
+
+
+}
+        System.out.println(ans);
     }
 }
+/*
+17 18 2 2 2 2 2 3 3 3 3 3 5 5 5 6 6 6 7
+
+ */
