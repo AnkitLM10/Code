@@ -33,28 +33,28 @@ int ans = 1;
             array[i]=list.get(i);
             ans=   (  (ans%mod)  + (array[i]%mod))%mod  ;
         }
-//int l=list.size()-1;
-//
-//while(k>1 && l!=0)
-//{
-//
-//    int p=array[l];
-//    for(int i=l-1;i>=0;i--)
-//    {
-//        int m=array[i];
-//        array[i]=  ((p%mod)*(list.get(i)%mod))%mod;
-//p=((p%mod)+(m%mod))%mod;
-//        ans=   ((ans%mod)  + (array[i]%mod))%mod  ;
-//    }
-//
-//
-//k--;
-//    l--;
-//
-//
-//
-//
-//}
+int l=list.size()-1;
+
+while(k>1 && l!=0)
+{
+
+    int p=array[l];
+    for(int i=l-1;i>=0;i--)
+    {
+        int m=array[i];
+        array[i]=  ((p%mod)*(list.get(i)%mod))%mod;
+p=((p%mod)+(m%mod))%mod;
+        ans=   ((ans%mod)  + (array[i]%mod))%mod  ;
+    }
+
+
+k--;
+    l--;
+
+
+
+
+}
         System.out.println(ans);
     }
 }
