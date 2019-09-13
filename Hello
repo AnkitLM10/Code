@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
- class test {
+class test {
     static int max = Integer.MAX_VALUE;
     static long maxValue = Integer.MAX_VALUE;
 
@@ -14,47 +14,43 @@ import java.util.Scanner;
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
-        int a[]=new int[8001];
-        int mod = 1000000007;
-        for(int i=0;i<n;i++)
-        a[sc.nextInt()]++;
+        long a[] = new long[8001];
+        long mod = 1000000007;
+        for (int i = 0; i < n; i++)
+            a[sc.nextInt()]++;
         Arrays.sort(a);
-        List<Integer> list=new ArrayList<>();
-        for(int i=8000;i>=0;i--)
-        {
-            if(a[i]==0)
+        List<Long> list = new ArrayList<>();
+        for (int i = 8000; i >= 0; i--) {
+            if (a[i] == 0)
                 break;
             list.add(a[i]);
         }
-        int array[]=new int[list.size()];
-int ans = 1;
-        for(int i=0;i<list.size();i++)
-        {
-            array[i]=list.get(i);
-            ans=   (  (ans%mod)  + (array[i]%mod))%mod  ;
+        long array[] = new long[list.size()];
+        long ans = 1;
+        for (int i = 0; i < list.size(); i++) {
+            array[i] = list.get(i);
+            ans = ((ans % mod) + (array[i] % mod)) % mod;
         }
-int l=list.size()-1;
+        int l = list.size() - 1;
 
-while(k>1 && l!=0)
-{
+        while (k > 1 && l != 0) {
 
-    int p=array[l];
-    for(int i=l-1;i>=0;i--)
-    {
-        int m=array[i];
-        array[i]=  ((p%mod)*(list.get(i)%mod))%mod;
-p=((p%mod)+(m%mod))%mod;
-        ans=   ((ans%mod)  + (array[i]%mod))%mod  ;
-    }
+            long p = array[l];
+            for (int i = l - 1; i >= 0; i--) {
+                long m = array[i];
+                array[i] = ((p % mod) * (list.get(i) % mod)) % mod;
+                p = ((p % mod) + (m % mod)) % mod;
+                ans = ((ans % mod) + (array[i] % mod)) % mod;
+            }
 
 
-k--;
-    l--;
+            k--;
+            l--;
 
 
+        }
 
 
-}
         System.out.println(ans);
     }
 }
