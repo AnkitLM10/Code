@@ -12,46 +12,87 @@ class test {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
-        long a[] = new long[8001];
-        long mod = 1000000007;
-        for (int i = 0; i < n; i++)
-            a[sc.nextInt()]++;
-        Arrays.sort(a);
-        List<Long> list = new ArrayList<>();
-        for (int i = 8000; i >= 0; i--) {
-            if (a[i] == 0)
-                break;
-            list.add(a[i]);
-        }
-        long array[] = new long[list.size()];
-        long ans = 1;
-        for (int i = 0; i < list.size(); i++) {
-            array[i] = list.get(i);
-            ans = ((ans % mod) + (array[i] % mod)) % mod;
-        }
-        int l = list.size() - 1;
+        int t=sc.nextInt();
 
-        while (k > 1 && l != 0) {
 
-            long p = array[l];
-            for (int i = l - 1; i >= 0; i--) {
-                long m = array[i];
-                array[i] = ((p % mod) * (list.get(i) % mod)) % mod;
-                p = ((p % mod) + (m % mod)) % mod;
-                ans = ((ans % mod) + (array[i] % mod)) % mod;
+        for(int i=0;i<t;i++) {
+            long n = sc.nextInt();
+            long k = sc.nextInt();
+            if (k < n - 1 || k > (n + (n * n - n) / 2)) {
+                System.out.println(-1);
+                continue;
+            }
+
+            if (k <= n + 1) {
+                System.out.println(2);
+                continue;
+            }
+            if (k > n + 1 && k <= n * 2) {
+                System.out.println(3);
+                return;
+            }
+            long a = 0, b = 0;
+            int ans = 3;
+            long left = k - n * 2;
+            long valueA = 3, valueB = 0;
+            a = n;
+
+            while (left > 0) {
+                if (valueB == 0) {
+                    long pairA = a / 2;
+                    left -= pairA;
+                    b = a - pairA * 2;
+                    a = pairA * 2;
+
+                } else {
+                    if (b % 2 == 0) {
+                        long pairB = b / 2;
+                        left -= pairB;
+                        a += b;
+                        b = 0;
+
+                    } else {
+                        long pairB = b / 2;
+                        if (left <= pairB)
+                            break;
+                        b += a;
+                        a = 1;
+                        left -= pairB;
+
+                    }
+
+
+                }
+
+                ans++;
+
+
             }
 
 
-            k--;
-            l--;
+            System.out.println(ans);
 
 
         }
 
 
-        System.out.println(ans);
+
+
+
+
+
+
+/*
+        for(int q=0;q<t;t++)
+        {
+
+
+
+
+
+
+        }
+*/
     }
 }
 /*
