@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
- class CodeForces {
+
+class CodeForces {
     static int max = 0;
     static int ii = -1;
     static int jj = -1;
@@ -61,8 +62,12 @@ import java.util.*;
             int n = sc.nextInt();
             long k = sc.nextLong();
             int a[] = new int[n];
+           // int b[] = new int[n];
             for (int i = 0; i < n; i++)
+            {
                 a[i] = sc.nextInt();
+       //     b[i] = a[i];
+        }
             long v=(k-1)/n;
             long j=v%3;
 
@@ -70,9 +75,10 @@ import java.util.*;
             {
                 if(k-1<=n)
                 {
-                    for(int i=0;i<((k%n)==0?n-1:k%n);i++)
+
+                    for(int i=0;i<=(k-1)%n;i++)
                     {
-                        a[i]=a[i]%a[n-(i%n)-1];
+                        a[i]=a[i]^a[n-(i%n)-1];
                     }
 
                 }
@@ -85,7 +91,7 @@ import java.util.*;
                         a[i]=a[i]^a[n-(i%n)-1];
                     for(int i=0;i<n;i++)
                         a[i]=a[i]^a[n-(i%n)-1];
-                    for(int i=0;i<((k%n)==0?n-1:k%n);i++)
+                    for(int i=0;i<=(k-1)%n;i++)
                     {
                         a[i]=a[i]^a[n-(i%n)-1];
                     }
@@ -101,7 +107,7 @@ import java.util.*;
 
                 for(int i=0;i<n;i++)
                     a[i]=a[i]^a[n-(i%n)-1];
-                for(int i=0;i<((k%n)==0?n-1:k%n);i++)
+                for(int i=0;i<=(k-1)%n;i++)
                 {
                     a[i]=a[i]^a[n-(i%n)-1];
                 }
@@ -118,7 +124,7 @@ import java.util.*;
                     a[i]=a[i]^a[n-(i%n)-1];
                 for(int i=0;i<n;i++)
                     a[i]=a[i]^a[n-(i%n)-1];
-                for(int i=0;i<((k%n)==0?n-1:k%n);i++)
+                for(int i=0;i<=(k-1)%n;i++)
                 {
                     a[i]=a[i]^a[n-(i%n)-1];
                 }
@@ -126,9 +132,22 @@ import java.util.*;
 
             }
 
+//            for(int i=0;i<k;i++)
+//            {
+//                //System.out.println((i%n)+"   "+(n-(i%n)-1));
+//                b[i%n]=b[i%n]^b[n-(i%n)-1];
+//            }
+
+
+
             for(int i:a)
                 System.out.print(i+" ");
             System.out.println();
+//
+//            for(int i:b)
+//                System.out.print(i+" ");
+//            System.out.println();
+//            System.out.println();
 
 
         }
