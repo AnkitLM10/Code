@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class CodeForces {
+public class CodeForces {
     static int max = 0;
     static int ii = -1;
     static int jj = -1;
@@ -56,100 +56,54 @@ class CodeForces {
     public static void main(String[] args) {
 
         FastReader sc = new FastReader();
-
+int ans=0;
         int t = sc.nextInt();
         for (int u = 0; u < t; u++) {
-            int n = sc.nextInt();
-            long k = sc.nextLong();
-            int a[] = new int[n];
-           // int b[] = new int[n];
-            for (int i = 0; i < n; i++)
-            {
-                a[i] = sc.nextInt();
-       //     b[i] = a[i];
-        }
-            long v=(k-1)/n;
-            long j=v%3;
-
-            if(j==0)
-            {
-                if(k-1<=n)
+          ans=0;
+                 int n=sc.nextInt();
+                 HashMap<Integer,Integer> map=new HashMap<>();
+                 for(int j=0;j<n;j++)
+                 {
+                     int k=sc.nextInt();
+                     int l=(int)Math.sqrt(k);
+                if(map.containsKey(k) && map.get(k)>ans)
                 {
-
-                    for(int i=0;i<=(k-1)%n;i++)
-                    {
-                        a[i]=a[i]^a[n-(i%n)-1];
-                    }
-
-                }
-                else
-                {
-
-                    for(int i=0;i<n;i++)
-                        a[i]=a[i]^a[n-(i%n)-1];
-                    for(int i=0;i<n;i++)
-                        a[i]=a[i]^a[n-(i%n)-1];
-                    for(int i=0;i<n;i++)
-                        a[i]=a[i]^a[n-(i%n)-1];
-                    for(int i=0;i<=(k-1)%n;i++)
-                    {
-                        a[i]=a[i]^a[n-(i%n)-1];
-                    }
-
-
+//                    System.out.println(k+"  "+map.get(k));
+//                    System.out.println(map.get(2));
+                    ans = map.get(k);
                 }
 
+                     for(int i=1;i<=l;i++)
+                     {
+                         if(k%i==0)
+                         {
+                             if(!map.containsKey(i))
+                                 map.put(i,0);
+                               if(!map.containsKey(k/i))
+                                 map.put(k/i,0);
 
+                             if(k/i==i)
+                             {
+                                 map.put(i,map.get(i)+1);
+                             }
+                             else
+                             {
+                                 map.put(i,map.get(i)+1);
+                                 map.put(k/i,map.get(k/i)+1);
 
-            }
-            else if(j==1)
-            {
-
-                for(int i=0;i<n;i++)
-                    a[i]=a[i]^a[n-(i%n)-1];
-                for(int i=0;i<=(k-1)%n;i++)
-                {
-                    a[i]=a[i]^a[n-(i%n)-1];
-                }
-
-
-
-
-
-
-            }
-            else
-            {
-                for(int i=0;i<n;i++)
-                    a[i]=a[i]^a[n-(i%n)-1];
-                for(int i=0;i<n;i++)
-                    a[i]=a[i]^a[n-(i%n)-1];
-                for(int i=0;i<=(k-1)%n;i++)
-                {
-                    a[i]=a[i]^a[n-(i%n)-1];
-                }
-
-
-            }
-
-//            for(int i=0;i<k;i++)
-//            {
-//                //System.out.println((i%n)+"   "+(n-(i%n)-1));
-//                b[i%n]=b[i%n]^b[n-(i%n)-1];
-//            }
+                             }
 
 
 
-            for(int i:a)
-                System.out.print(i+" ");
-            System.out.println();
-//
-//            for(int i:b)
-//                System.out.print(i+" ");
-//            System.out.println();
-//            System.out.println();
+                         }
 
 
+                     }
+                  //   System.out.println(map);
+
+                 }
+
+            System.out.println(ans);
         }
 
 
